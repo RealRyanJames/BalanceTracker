@@ -6,6 +6,11 @@ enum TypeExitCode {
     ExitCodePaste
 }
 
+static String createdBy() {
+
+    return "ZumbaCodes | Ryan".toUpperCase();
+}
+
 static class ExitCode {
 
     public int GetType(TypeExitCode code) {
@@ -21,58 +26,79 @@ static class ExitCode {
     }
 }
 
-void main() {
+static class NameUser implements User {
 
-    String input = "Title: Balance Tracker CLI";
-    Scanner s = new Scanner(input);
-    StringBuilder strBuilder = new StringBuilder();
-    while(s.hasNextLine()) {
-
-        String l = s.nextLine();
-        strBuilder.append(l);
+    @Override
+    public String GetUserName() {
+        return "Created By: " + createdBy();
     }
 
-    String r = strBuilder.toString();
-    System.out.print(r + "\n");
+    @Override
+    public long lengthName() {
+        return GetUserName().length();
+    }
+}
 
-    s.close();
-    Scanner scan = new Scanner(System.in);
+void main() {
     ExitCode codeError = new ExitCode();
 
-    String messages = "Welcome to My Balance Program v1";
-    System.out.print(messages + "\n");
+    NameUser user = new NameUser();
 
-    StringsMessages message = new StringsMessages();
-    message.ShowUISetup();
+    String input = "Title: Balance Tracker CLI";
+    String nameOfUser = user.GetUserName();
+    if (user.lengthName() > 1) {
 
-    double itemCount = 0.0;
-    System.out.print("=> Enter Item Length: " + (itemCount + 1) + "\n");
-    message.ShowUISetup();
-    itemCount += scan.nextDouble();
+        Scanner s = new Scanner(input);
+        StringBuilder strBuilder = new StringBuilder();
+        while (s.hasNextLine()) {
 
-
-    for (int count = 0; count < itemCount; count++) {
-
-        double itemStack = 0.0;
-        System.out.print("=> Enter Item Price: " + (itemCount + 1) + "\n");
-        itemStack += scan.nextDouble();
-
-        double calc = itemStack + count;
-        System.out.print("=> You Will Have Already Spent: $" + calc);
-
-        if ((int) itemCount != 0) {
-
-            System.exit(codeError.GetType(TypeExitCode.Error));
+            String l = s.nextLine();
+            strBuilder.append(l);
         }
 
-        File file = new File("Calc.txt");
+        String r = strBuilder.toString();
+        System.out.print(r + "\n");
 
-        try (FileWriter write = new FileWriter(file.getName())) {
-            write.write("=> You Will Have Already Spent: $" + calc);
+        s.close();
+        Scanner scan = new Scanner(System.in);
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        String messages = "Welcome to My Balance Program v1";
+        System.out.print(messages + "\n");
+        System.out.print(nameOfUser + "\n");
+
+        StringsMessages message = new StringsMessages();
+        message.ShowUISetup();
+
+        double itemCount = 0.0;
+        System.out.print("=> Enter Item Length: " + (itemCount + 1) + "\n");
+        message.ShowUISetup();
+        itemCount += scan.nextDouble();
+
+
+        for (int count = 0; count < itemCount; count++) {
+
+            double itemStack = 0.0;
+            System.out.print("=> Enter Item Price: " + (itemCount + 1) + "\n");
+            itemStack += scan.nextDouble();
+
+            double calc = itemStack + count;
+            System.out.print("=> You Will Have Already Spent: $" + calc);
+
+            if ((int) itemCount != 0) {
+
+                System.exit(codeError.GetType(TypeExitCode.Error));
+            }
+
+            File file = new File("Calc.txt");
+
+            try (FileWriter write = new FileWriter(file.getName())) {
+                write.write("=> You Will Have Already Spent: $" + calc);
+
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
+
     }
 
     System.exit(codeError.GetType(TypeExitCode.ExitCodePaste));
