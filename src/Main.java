@@ -23,6 +23,19 @@ static class ExitCode {
 
 void main() {
 
+    String input = "Title: Balance Tracker CLI";
+    Scanner s = new Scanner(input);
+    StringBuilder strBuilder = new StringBuilder();
+    while(s.hasNextLine()) {
+
+        String l = s.nextLine();
+        strBuilder.append(l);
+    }
+
+    String r = strBuilder.toString();
+    System.out.print(r + "\n");
+
+    s.close();
     Scanner scan = new Scanner(System.in);
     ExitCode codeError = new ExitCode();
 
