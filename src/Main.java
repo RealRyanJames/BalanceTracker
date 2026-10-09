@@ -69,33 +69,67 @@ void main() {
         StringsMessages message = new StringsMessages();
         message.ShowUISetup();
 
-        double itemCount = 0.0;
-        System.out.print("=> Enter Item Length: " + (itemCount + 1) + "\n");
-        message.ShowUISetup();
-        itemCount += scan.nextDouble();
+        String inputByUser = scan.nextLine();
+        if (inputByUser.equals("Y") || inputByUser.equals("A")) {
 
+            double itemCount = 0.0;
+            System.out.print("=> Enter Item Length: " + (itemCount + 1) + "\n");
+            message.ShowUISetup();
+            itemCount += scan.nextDouble();
 
-        for (int count = 0; count < itemCount; count++) {
+            for (int count = 0; count < itemCount; count++) {
 
-            double itemStack = 0.0;
-            System.out.print("=> Enter Item Price: " + (itemCount + 1) + "\n");
-            itemStack += scan.nextDouble();
+                double itemStack = 0.0;
+                System.out.print("=> Enter Item Price: " + (itemCount + 1) + "\n");
+                itemStack += scan.nextDouble();
 
-            double calc = itemStack + count;
-            System.out.print("=> You Will Have Already Spent: $" + calc);
+                double calc = itemStack + count;
+                System.out.print("=> You Will Have Already Spent: $" + calc);
 
-            if ((int) itemCount != 0) {
+                if ((int) itemCount != 0) {
 
-                System.exit(codeError.GetType(TypeExitCode.Error));
+                    System.exit(codeError.GetType(TypeExitCode.Error));
+                }
+
+                File file = new File("Calc.txt");
+
+                try (FileWriter write = new FileWriter(file.getName())) {
+                    write.write("=> You Will Have Already Spent: $" + calc);
+
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
+        }
+        else if (inputByUser.equals("N") || inputByUser.equals("S") ) {
 
-            File file = new File("Calc.txt");
+            double itemCount = 0.0;
+            System.out.print("=> Enter Item Length: " + (itemCount + 1) + "\n");
+            message.ShowUISetup();
+            itemCount += scan.nextDouble();
 
-            try (FileWriter write = new FileWriter(file.getName())) {
-                write.write("=> You Will Have Already Spent: $" + calc);
+            for (int count = 0; count < itemCount; count++) {
 
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+                double itemStack = 0.0;
+                System.out.print("=> Enter Item Price: " + (itemCount + 1) + "\n");
+                itemStack += scan.nextDouble();
+
+                double calc = itemStack - count;
+                System.out.print("=> You Will Have Already Spent: $" + calc);
+
+                if ((int) itemCount != 0) {
+
+                    System.exit(codeError.GetType(TypeExitCode.Error));
+                }
+
+                File file = new File("Calc.txt");
+
+                try (FileWriter write = new FileWriter(file.getName())) {
+                    write.write("=> You Will Have Already Spent: $" + calc);
+
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
 
