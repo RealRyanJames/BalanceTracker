@@ -66,9 +66,11 @@ void main() {
         System.out.print(messages + "\n");
         System.out.print(nameOfUser + "\n");
 
-        StringsMessages message = new StringsMessages();
+        StringsMessages<Void> message = new StringsMessages<>();
         message.ShowUISetup();
 
+        System.out.print("=> Add['Y', 'A']\n");
+        System.out.print("=> Sub['N', 'S']\n");
         String inputByUser = scan.nextLine();
         if (inputByUser.equals("Y") || inputByUser.equals("A")) {
 

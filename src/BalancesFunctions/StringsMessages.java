@@ -1,6 +1,6 @@
 package BalancesFunctions;
 
-public class StringsMessages {
+public class StringsMessages<T> {
 
     public void ShowUISetup() {
 
